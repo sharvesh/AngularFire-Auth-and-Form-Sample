@@ -112,12 +112,12 @@ label.required:after {
     margin: auto;
     float: none;
 }
-.ng-valid.ng-dirty, .ng-valid.ng-touched  {
+input.ng-valid.ng-dirty,textarea.ng-valid.ng-dirty, input.ng-valid.ng-touched  {
     background-color: #F6FCFE;
     outline:none;
 }
 
-.ng-invalid.ng-dirty,.ng-invalid.ng-touched {
+input.ng-invalid.ng-dirty,textarea.ng-invalid.ng-dirty,input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched {
   background-color: #FFCDD2;
   outline:none;
   border-color:#F44336;
