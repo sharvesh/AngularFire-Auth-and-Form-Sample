@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Expenses</h3>
+</div>
+<div class="modal-body" id="modal-body">
+  <!-- form start -->
+  <ng-form class="form-horizontal" name="$ctrl.subFrom" novalidate>
+    <div class="form-group ">
+      <label class="control-label col-sm-3 required" for="date">Date of transaction :</label>
+      <div class="col-sm-3">
+        <p class="input-group">
+          <input type="text" id="date" class="form-control datepicker" readonly="readonly" uib-datepicker-popup show-button-bar="false" data-ng-click="$ctrl.calender.opened = !$ctrl.calender.opened" ng-model="$ctrl.claim.date" is-open="$ctrl.calender.opened" datepicker-options="$ctrl.dateOptions"
+            ng-required="true" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="$ctrl.calender.opened = !$ctrl.calender.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3 required" for="costCenter">Cost Center :</label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" id="costCenter" ng-model="$ctrl.claim.costCenter" required ng-change="$ctrl.claim.costCenter = $ctrl.claim.costCenter.toUpperCase()" />
+      </div>
+      <label class="control-label col-sm-2 required" for="glCode">GL Code :</label>
+      <div class="col-sm-3">
+        <input type="number" ng-min="0000" ng-max="9999" class="form-control" id="glCode" ng-model="$ctrl.claim.glCode" ng-pattern="/^-?[0-9][^\.]*$/" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3 required" for="description">Description :</label>
+      <div class="col-sm-8">
+        <textarea row="3" class="form-control" id="description" required ng-model="$ctrl.claim.description" />
+        <small class="form-text text-muted text-center">For tax purposes, you must disclose the names of Employees in attendance at meals and entertainment expenses claim, Please include all names in description</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3 required" for="amount">Amount :</label>
+      <div class="col-sm-5">
+        <div class="input-group">
+          <select style="width:40%" class="form-control" ng-model="$ctrl.claim.currency" ng-options="value.code as value.display group by value.group for (key, value) in $ctrl.currencyList" ng-change="$ctrl.totalSum()" required>
+<option disabled value="" > Currency </option>
+          </select>
+          <input style="width:60%" type="number" class="form-control" id="amount" name="amount" ng-model="$ctrl.claim.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-change="$ctrl.totalSum()" required/>
+        </div>
+        <!-- /input-group -->
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3 required" for="gst">GST :</label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" id="gst" name="gst" ng-model="$ctrl.claim.gst" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-change="$ctrl.totalSum()" required/>
+      </div>
+      <label class="control-label col-sm-2" ng-class="{'required' : $ctrl.claim.currency!='MYR' }" for="exchangeRate">Exchange Rate:</label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" id="exchangeRate" name="exchangeRate" ng-model="$ctrl.claim.exchangeRate" ng-disabled="$ctrl.claim.currency=='MYR'" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-change="$ctrl.totalSum()" required/>
+      </div>
+    </div>
+    <div class="form-group" ng-show="$ctrl.claim.total">
+      <label class="control-label col-sm-3 required" for="total">Total Amount (RM) :</label>
+      <div class="col-sm-3">
+        <p class="form-control-static">{{ $ctrl.claim.total | number:2}}</p>
+        <!-- <input type="number" class="form-control" id="total" name="total" value="{{$ctrl.claim.total | number:2}}" readonly /> -->
+      </div>
+    </div>
+
+  </ng-form>
+  <!-- form end -->
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-disabled="$ctrl.subFrom.$invalid" ng-click="$ctrl.add()">Add Claim</button>
+  <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+</div>

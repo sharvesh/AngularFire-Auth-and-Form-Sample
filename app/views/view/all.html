@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<div class="container">
+  <uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel-default" heading="{{claim.name}} ( {{claim.timeStamp | date : 'dd/MM/yyyy'}} )" ng-repeat="claim in claims">
+      <div class="container-fluid">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Submitted by : {{claim.user.displayName | uppercase}}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-md-12">
+              <div class="col-md-3 "><label>Claim on behalf of :</label></div>
+              <div class="col-md-3"> {{claim.name | uppercase}}</div>
+              <div class="col-md-3 "><label>Claim date :</label></div>
+              <div class="col-md-3"> {{claim.submissionDate}}</div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-3 "><label>Branch Code :</label></div>
+              <div class="col-md-3"> {{claim.branchCode}}</div>
+            </div>
+            <br/><br/>
+            <div class="col-md-12"><b><u>Bank Account Details</u></b></div>
+            <div class="col-md-12">
+              <div class="col-md-3 pull-"><label>Bank Code :</label></div>
+              <div class="col-md-3"> {{claim.bankDetails.bankCode}}</div>
+              <div class="col-md-3 "><label>Bank Account No. :</label></div>
+              <div class="col-md-3"> {{claim.bankDetails.bankAccNo}}</div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-3"><label>Account Holder Name :</label></div>
+              <div class="col-md-5"> {{claim.bankDetails.accHolderName}}</div>
+            </div>
+
+
+          </div>
+          <!-- body -->
+          <!-- Table -->
+          <div class="form-group table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Sr. No</th>
+                  <th>Date of Transaction</th>
+                  <th>Cost Center</th>
+                  <th>GL Code</th>
+                  <th>Description</th>
+                  <th>Currency</th>
+                  <th>Amount</th>
+                  <th>GST</th>
+                  <th>Exchange Rate</th>
+                  <th>Total Amount (RM)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in claim.list">
+                  <td>{{$index+1}}</td>
+                  <td>{{item.date}}</td>
+                  <td>{{item.costCenter}}</td>
+                  <td>{{item.glCode}}</td>
+                  <td>{{item.description}}</td>
+                  <td>{{item.currency}}</td>
+                  <td>{{item.amount | number:2}}</td>
+                  <td>{{item.gst| number:2}}</td>
+                  <td>{{item.exchangeRate| number:2}}</td>
+                  <td>{{item.total| number:2}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </uib-accordion>
+</div>

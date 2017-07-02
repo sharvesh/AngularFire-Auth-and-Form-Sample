@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "app",
+    "ignore": [
+      "firebase.json",
+      "bower.json",
+      "e2e-tests",
+      "karma.conf.js",
+      "package.json"
+    ]
+  }
+}

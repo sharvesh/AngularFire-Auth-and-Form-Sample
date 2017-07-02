@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<div class="row">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading text-center"><b><u>Expenses Claims</u></b></div>
+    <br />
+    <div class="panel-body">
+      <ng-form class="form-horizontal" name="claimForm" role="form" novalidate>
+
+        <div class="form-group">
+          <label class="control-label col-sm-3 required" for="branchCode">Branch Code (Office - Division) :</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control input-sm" id="branchCode" ng-model="form.branchCode" ng-change="form.branchCode = form.branchCode.toUpperCase()" required/>
+          </div>
+
+          <label class="control-label col-sm-2" for="date">Date :</label>
+          <div class="col-sm-3">
+            <p class="form-control-static">{{form.submissionDate | date : 'dd/MM/yyyy' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 required" for="name">Name :</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="name" ng-model="form.name" ng-focus="addName()" ng-change="form.name = form.name.toUpperCase()" required/>
+          </div>
+        </div>
+        <div class="col-sm-12 text-center">
+          <small class="form-text text-muted">Bank Account Details ( Payment will be made to this bank account )</small>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 required" for="bankCode">Bank Code / Branch Code :</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="bankCode" ng-model="form.bankDetails.bankCode" ng-change="form.bankDetails.bankCode = form.bankDetails.bankCode.toUpperCase()" required/>
+          </div>
+          <label class="control-label col-sm-2 required" for="bankAccNo">Bank Account No :</label>
+          <div class="col-sm-3">
+            <input type="number" class="form-control" id="bankAccNo" ng-model="form.bankDetails.bankAccNo" ng-min="10000" ng-max="99999999999999999" required/>
+            <!-- min (5 digit) and max(17 digit) based on https://www.maybank2u.com.my/mbb/m2u/public/personalDetail04.do?channelId=ACC-Accounts&cntTypeId=0&cntKey=ACC04.03&programId=ACC04-FundsTransfers&chCatId=/mbb/Personal/ACC-Accounts -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 required" for="accHolderName">Name in which A/C is held :</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="accHolderName" ng-model="form.bankDetails.accHolderName" ng-pattern="alphaNumeric" ng-change="form.bankDetails.accHolderName = form.bankDetails.accHolderName.toUpperCase()" required/>
+            <small class="form-text text-muted">As per your bank statement or cheque book </small>
+
+          </div>
+        </div>
+        <!--table -->
+
+        <div class="form-group">
+          <div class="col-offset-sm-3 col-sm-10">
+            <button type="button" class="btn btn-default" ng-click="add()">Add</button>
+          </div>
+        </div>
+
+        <div class="form-group table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Sr. No</th>
+                <th>Date of Transaction</th>
+                <th>Cost Center</th>
+                <th>GL Code</th>
+                <th>Description</th>
+                <th>Currency</th>
+                <th>Amount</th>
+                <th>GST</th>
+                <th>Exchange Rate</th>
+                <th>Total Amount (RM)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-if="form.list.length < 1">
+                <td colspan="11" class="text-center bg-info">List is empty (
+                  <span class="text-danger">Minimum 1 is required *</span>)</td>
+              </tr>
+              <tr ng-repeat="item in form.list">
+                <td>{{$index+1}}</td>
+                <td>{{item.date }}</td>
+                <td>{{item.costCenter}}</td>
+                <td>{{item.glCode}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.currency}}</td>
+                <td>{{item.amount | number:2}}</td>
+                <td>{{item.gst| number:2}}</td>
+                <td>{{item.exchangeRate| number:2}}</td>
+                <td>{{item.total| number:2}}</td>
+                <td><i class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--  end table -->
+        <br/>
+        <div class="checkbox text-center">
+
+          <label for="agreement" class="required">
+            <input id="agreement" type="checkbox" ng-model="checkboxModel.value1" required>
+            <b>I certify that the amounts claimed above were incurred on company business</b>
+        </label>
+        </div>
+        <br/>
+        <div class="form-actions">
+          <div class="text-center">
+            <button type="submit" ng-disabled="claimForm.$invalid || form.list.length < 1" ng-click="send()" class="btn btn-large btn-primary">Submit Claim</button>
+          </div>
+        </div>
+
+
+      </ng-form>
+    </div>
+  </div>
+
+</div>

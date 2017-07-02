@@ -1,0 +1,125 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li + li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+body {
+  padding-top: 70px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+.profile-img img{
+    margin-top: -5px;
+    margin-right: 5px;
+    float: left;
+    background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_1280.png) 50% 50% no-repeat; /* 50% 50% centers image in div */
+    background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
+    width: 30px;
+    height: 30px;
+}
+
+.top-buffer {
+  margin-top:10px;
+}
+.panel-body {
+    padding:15px 0;
+}
+
+.form-group {
+  padding-left:15px;
+}
+.form-actions {
+    margin: 0;
+    background-color: transparent;
+    text-align: center;
+}
+label.required:after {
+    color: red;
+    content: ' *';
+    display:inline;
+}
+
+.datepicker[readonly]{
+  background-color: white;
+  cursor: default;
+}
+.input-group select.form-control {
+  -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
+}
+.table {
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    float: none;
+}
+.ng-valid.ng-dirty, .ng-valid.ng-touched  {
+    background-color: #F6FCFE;
+    outline:none;
+}
+
+.ng-invalid.ng-dirty,.ng-invalid.ng-touched {
+  background-color: #FFCDD2;
+  outline:none;
+  border-color:#F44336;
+  box-shadow:0 0 10px #F44336;
+}

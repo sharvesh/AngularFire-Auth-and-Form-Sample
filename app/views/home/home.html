@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<div>
+  <div class="col-sm-12 text-center" style="padding-bottom:0px;">
+    <h2>Welcome {{$root.userData.displayName}} !</h2>
+  </div>
+
+  <div ng-show="!$root.activeSession" class="col-sm-offset-4 col-sm-4">
+    <span ng-if="!showForm">Sign in by :</span>
+    <button ng-if="!showForm" class="btn btn-lg btn-primary btn-block" ng-click="signIn('google')">Google</button>
+    <button ng-class="{'btn-lg btn-primary btn-block' : !showForm , 'btn-sm btn-default' : showForm } " class="btn" ng-click="showForm = !showForm">
+          <span ng-hide="showForm">Email</span>
+          <span ng-show="showForm">Back</span>
+        </button>
+  </div>
+  <div class="col-sm-offset-4 col-sm-4">
+    <ng-form ng-show="showForm" name="loginForm" class="form-signin">
+      <input type="email" class="form-control" placeholder="Email address" ng-model="login.username" ng-required="true" autofocus="">
+      <input type="password" class="form-control" placeholder="Password" ng-model="login.pass" ng-required="true">
+      <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="signIn('email')" ng-disabled="loginForm.$invalid">Sign in</button>
+    </ng-form>
+  </div>
+
+</div>
