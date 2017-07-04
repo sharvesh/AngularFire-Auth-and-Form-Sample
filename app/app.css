@@ -123,3 +123,6 @@ input.ng-invalid.ng-dirty,textarea.ng-invalid.ng-dirty,input.ng-invalid.ng-touch
   border-color:#F44336;
   box-shadow:0 0 10px #F44336;
 }
+.panel {
+   word-wrap: break-word;
+}
